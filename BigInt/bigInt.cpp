@@ -33,34 +33,34 @@ BigInt& BigInt::operator/=(const BigInt& rhs) {
   return *this;
 }
 
-bool BigInt::operator==(const BigInt& rhs) {
+bool BigInt::operator==(const BigInt& rhs) const {
   return bigInt == rhs.bigInt;
 }
 
-bool BigInt::operator<=(const BigInt& rhs) {
+bool BigInt::operator<=(const BigInt& rhs) const {
   return compareStr(bigInt, rhs.bigInt) <= 0;
 }
 
-bool BigInt::operator<(const BigInt& rhs) {
+bool BigInt::operator<(const BigInt& rhs) const {
   return compareStr(bigInt, rhs.bigInt) < 0;
 }
 
-bool BigInt::operator>=(const BigInt& rhs) {
+bool BigInt::operator>=(const BigInt& rhs) const {
   return compareStr(bigInt, rhs.bigInt) >= 0;
 }
 
-bool BigInt::operator>(const BigInt& rhs) {
+bool BigInt::operator>(const BigInt& rhs) const {
   return compareStr(bigInt, rhs.bigInt) > 0;
 }
 
-BigInt BigInt::operator+(const BigInt& rhs) {
+BigInt BigInt::operator+(const BigInt& rhs) const {
   string bigIntRight = rhs.bigInt;
   BigInt res;
   res.bigInt = addHelper(bigInt, bigIntRight);
   return res;
 }
 
-BigInt BigInt::operator-(const BigInt& rhs) {
+BigInt BigInt::operator-(const BigInt& rhs) const {
   string bigIntRight = rhs.bigInt;
   BigInt res;
   int cp = compareStr(bigInt, bigIntRight);
@@ -74,14 +74,14 @@ BigInt BigInt::operator-(const BigInt& rhs) {
   return res;
 }
 
-BigInt BigInt::operator*(const BigInt& rhs) {
+BigInt BigInt::operator*(const BigInt& rhs) const {
   BigInt res;
   string bigIntRight = rhs.bigInt;
   res.bigInt = multiplyHelper(bigInt, bigIntRight);
   return res;
 }
 
-BigInt BigInt::operator%(const BigInt& rhs) {
+BigInt BigInt::operator%(const BigInt& rhs) const {
   string bigIntRight = rhs.bigInt;
   BigInt res;
   int cp = compareStr(bigInt, bigIntRight);
@@ -95,7 +95,7 @@ BigInt BigInt::operator%(const BigInt& rhs) {
   return res;
 }
 
-BigInt BigInt::operator/(const BigInt& rhs) {
+BigInt BigInt::operator/(const BigInt& rhs) const {
   string bigIntRight = rhs.bigInt;
   BigInt res;
   int cp = compareStr(bigInt, bigIntRight);
@@ -109,7 +109,7 @@ BigInt BigInt::operator/(const BigInt& rhs) {
   return res;
 }
 
-int BigInt::compareStr(const string& num1, const string& num2) {
+int BigInt::compareStr(const string& num1, const string& num2) const {
   int res = 0;
   int size1 = num1.size();
   int size2 = num2.size();
@@ -128,7 +128,7 @@ int BigInt::compareStr(const string& num1, const string& num2) {
   return res;
 }
 
-string BigInt::addHelper(const string& num1, const string& num2) {
+string BigInt::addHelper(const string& num1, const string& num2) const {
     int carry = 0;
     string res = "";
     int sum = 0;
@@ -162,7 +162,7 @@ string BigInt::addHelper(const string& num1, const string& num2) {
     }
     return res;
   }
-string BigInt::subHelper(const string& num1, const string& num2) {
+string BigInt::subHelper(const string& num1, const string& num2) const {
   string res = "";
   int diff = 0;
   int borrow = 0;
@@ -201,7 +201,7 @@ string BigInt::subHelper(const string& num1, const string& num2) {
   return res;
 }
 
-string BigInt::multiplyHelper(const string& num1, const string& num2) {
+string BigInt::multiplyHelper(const string& num1, const string& num2) const {
   string sum(num1.size() + num2.size(), '0');  
   for (int i = num1.size() - 1; i >= 0; --i) {
     int carry = 0;
@@ -220,7 +220,7 @@ string BigInt::multiplyHelper(const string& num1, const string& num2) {
   return "0";
 }
 
-pair<string,string> BigInt::divideHelper(const string& num1, const string& num2) {
+pair<string,string> BigInt::divideHelper(const string& num1, const string& num2) const {
   if (num2 == "0") {
     cout << "oops, divided by 0" << endl;
     exit(-1);
